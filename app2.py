@@ -115,13 +115,14 @@ with st.sidebar:
             if cols[0].button("Eliminar", key=f"del_{i}"):
                 st.session_state[MEMORIES_KEY].pop(i)
                 save_memories(st.session_state[MEMORIES_KEY])
-                st.experimental_rerun()
+                st.rerun()
             if cols[1].button("Editar", key=f"edit_{i}"):
                 new = st.text_input("Editar memoria", value=mem['text'], key=f"edit_input_{i}")
                 if st.button("Guardar", key=f"save_mem_{i}"):
                     st.session_state[MEMORIES_KEY][i]['text'] = new
                     save_memories(st.session_state[MEMORIES_KEY])
-                    st.experimental_rerun()
+                    st.rerun()
+
     else:
         st.write("(Sin recuerdos guardados)")
 
@@ -133,7 +134,8 @@ with st.sidebar:
             st.session_state[MEMORIES_KEY].append(mem_obj)
             save_memories(st.session_state[MEMORIES_KEY])
             st.success("Memoria guardada")
-            st.experimental_rerun()
+            st.rerun()
+
 
     st.markdown("---")
     st.write("Configuración:")
@@ -213,7 +215,8 @@ if st.button("Enviar") and user_input.strip():
 
     # Append bot reply
     st.session_state[HISTORY_KEY].append({'role': 'bot', 'text': bot_text})
-    st.experimental_rerun()
+    st.rerun()
+
 
 # ----------------------
 # Footer: show memories being used
